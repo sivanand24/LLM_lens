@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Env
+.env
+
+# Node / Angular
+node_modules/
+frontend/dist/
+frontend/.angular/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
