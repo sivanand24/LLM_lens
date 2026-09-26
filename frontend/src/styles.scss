@@ -1,0 +1,56 @@
+:root {
+  /* Severity colour tokens (CLAUDE.md) */
+  --mat-red-600: #e53935;
+  --mat-amber-600: #ffb300;
+  --mat-blue-grey-400: #78909c;
+  --mat-green-600: #43a047;
+
+  --sev-high: var(--mat-red-600);
+  --sev-medium: var(--mat-amber-600);
+  --sev-low: var(--mat-blue-grey-400);
+  --sev-none: var(--mat-green-600);
+
+  --lens-bg: #f4f5f7;
+  --lens-surface: #ffffff;
+  --lens-border: #e0e3e8;
+  --lens-text: #1f2328;
+  --lens-muted: #636c76;
+  --lens-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background: var(--lens-bg);
+  color: var(--lens-text);
+}
+
+.lens-panel {
+  background: var(--lens-surface);
+  border: 1px solid var(--lens-border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.mat-typography .lens-panel-title,
+.lens-panel-title {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--lens-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.mono {
+  font-family: var(--lens-mono);
+}
+
+.muted {
+  color: var(--lens-muted);
+}

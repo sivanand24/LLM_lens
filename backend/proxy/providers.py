@@ -95,8 +95,11 @@ _SENTENCES = [
 def _prose(rng: random.Random, min_chars: int, max_chars: int) -> str:
     target = rng.randint(min_chars, max_chars)
     parts: list[str] = []
+    deck: list[str] = []
     while sum(len(p) + 1 for p in parts) < target:
-        parts.append(rng.choice(_SENTENCES))
+        if not deck:  # draw without repeats until the pool is exhausted
+            deck = rng.sample(_SENTENCES, len(_SENTENCES))
+        parts.append(deck.pop())
     text = " ".join(parts)
     # Trim whole sentences if we overshot the max.
     while len(text) > max_chars and len(parts) > 1:
