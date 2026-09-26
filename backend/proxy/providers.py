@@ -138,21 +138,22 @@ class MockProvider:
             finish_reason = "length"
         elif mode == "bad_json":
             text = '{"answer": "%s", "confidence": 0.82, "sources": ["kb-114", "kb-207"],}' % rng.choice(_SENTENCES)
-        elif mode == "pii":
-            text = (
-                f"{_prose(rng, 200, 400)} You can reach the account owner at "
-                f"jane.doe{rng.randint(10, 99)}@example.com or call +1 415-555-{rng.randint(1000, 9999)}."
-            )
-        elif mode == "verbose":
-            text = _prose(rng, 4200, 6000)
-        elif wants_json:  # normal / slow with JSON requested
+        else:
+            if mode == "pii":
+                answer = (
+                    f"{_prose(rng, 200, 400)} You can reach the account owner at "
+                    f"jane.doe{rng.randint(10, 99)}@example.com or call +1 415-555-{rng.randint(1000, 9999)}."
+                )
+            elif mode == "verbose":
+                answer = _prose(rng, 4200, 6000)
+            else:  # normal / slow
+                answer = _prose(rng, 250, 700) if wants_json else _prose(rng, 300, 900)
+            # Respect the requested format so each mode trips only its own check.
             text = json.dumps({
-                "answer": _prose(rng, 250, 700),
+                "answer": answer,
                 "confidence": round(rng.uniform(0.6, 0.99), 2),
                 "sources": [f"kb-{rng.randint(100, 999)}" for _ in range(rng.randint(1, 3))],
-            })
-        else:  # normal / slow
-            text = _prose(rng, 300, 900)
+            }) if wants_json else answer
 
         return ProviderResult(
             text=text,

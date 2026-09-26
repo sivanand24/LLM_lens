@@ -39,6 +39,10 @@ def test_normal_is_clean(seed):
     ("error", None, 5, "error"),
     ("pii", None, 1200, "pii"),
     ("verbose", None, 1200, "length_anomaly"),
+    # JSON-expecting apps: modes stay valid JSON unless breaking it is the point
+    ("pii", "json", 1200, "pii"),
+    ("verbose", "json", 1200, "length_anomaly"),
+    ("slow", "json", 9000, "slow"),
 ])
 def test_failure_modes(mode, expected_format, latency_ms, flag):
     assert run_mode(mode, expected_format, latency_ms) == {flag}

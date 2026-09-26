@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "core",
     "proxy",
     "checks.apps.ChecksConfig",
+    "stats",
 ]
 
 MIDDLEWARE = [

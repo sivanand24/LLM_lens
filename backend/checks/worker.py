@@ -98,7 +98,7 @@ def _run() -> None:
             time.sleep(backoff)
             backoff = min(backoff * 2, 60)
 
-    next_drift = time.monotonic() + settings.DRIFT_INTERVAL_SECS
+    next_drift = time.monotonic()  # first drift run right after the sweep
     while True:
         try:
             call_id = _queue.get(timeout=QUEUE_WAIT_SECS)
